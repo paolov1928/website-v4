@@ -229,7 +229,7 @@ const Main: React.FC<MainProps> = ({
             </a>
           </li>
           <li key="contact-icon-2">
-            <a href="https://www.linkedin.com/in/paolo-ventura-8143aa143/">
+            <a href="https://www.linkedin.com/in/paolo-ventura/">
               {/* @ts-ignore */}
               <FontAwesomeIcon icon={faLinkedin} />
             </a>
