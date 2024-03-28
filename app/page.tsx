@@ -58,7 +58,7 @@ const IndexPage = () => {
     >
       <div>
         <Head>
-          <title>Paolo's Website</title>
+          <title>Paolo&apos;s Website</title>
 
           <meta name="viewport" content="width=device-width, initial-scale=1" />
         </Head>
