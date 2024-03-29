@@ -6,6 +6,7 @@ import {
   faLinkedin,
   faMedium,
 } from '@fortawesome/fontawesome-free-brands';
+import Image from 'next/image';
 import { IntroCopy, WorkCopy, AboutCopy } from './copy';
 
 interface MainProps {
@@ -89,11 +90,11 @@ const Main: React.FC<MainProps> = ({
         <h2 className="major">Intro</h2>
         <p>{IntroCopy.main}</p>
         <span className="image main image__intro">
-          <img
-            src={`/images/intro-pic.jpg`}
-            alt=""
+          <Image
             className="laughing-photo"
-            width={'200px'}
+            src="/images/intro-pic.jpg"
+            alt=""
+            width={200}
           />
         </span>
         {close}
@@ -134,9 +135,9 @@ const Main: React.FC<MainProps> = ({
       >
         <h2 className="major">About</h2>
         <span className="image main image__about">
-          <img
+          <Image
             className="curious-george-photo"
-            src={`/images/curious-george.png`}
+            src="/images/curious-george.png"
             alt=""
           />
         </span>
