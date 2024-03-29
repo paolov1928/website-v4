@@ -94,7 +94,9 @@ const Main: React.FC<MainProps> = ({
             className="laughing-photo"
             src="/images/intro-pic.jpg"
             alt=""
+            height={100}
             width={200}
+            style={{ height: 'auto' }}
           />
         </span>
         {close}
@@ -139,6 +141,8 @@ const Main: React.FC<MainProps> = ({
             className="curious-george-photo"
             src="/images/curious-george.png"
             alt=""
+            width={200}
+            height={113}
           />
         </span>
         {AboutCopy.main.map((text: string, i: number) => (
