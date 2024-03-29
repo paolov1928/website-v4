@@ -55,14 +55,14 @@ export const WorkCopy = {
       workplace: 'Tokio Marine Kiln',
       dates: 'October 2014 - August 2018',
       blurb:
-        'International property underwriter in Lloyd’s of London. Writing EMEA domiciled facultative reinsurance. Developed my own profitable portfolio of $1.5m gross written premium within the Large Corporate Property team.',
+        "International property underwriter in Lloyd's of London. Writing EMEA domiciled facultative reinsurance. Developed my own profitable portfolio of $1.5m gross written premium within the Large Corporate Property team.",
     },
     {
       title: 'Student',
       workplace: 'Warwick University',
       dates: 'October 2010 - July 2014',
       blurb:
-        'Bsc (Hons) in ‘Economics with Study Abroad at Universidad Carlos III de Madrid’, Upper Second Class (2.1)',
+        "Bsc (Hons) in 'Economics with Study Abroad at Universidad Carlos III de Madrid', Upper Second Class (2.1)",
     },
   ],
 };
