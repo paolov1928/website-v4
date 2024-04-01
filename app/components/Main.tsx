@@ -6,8 +6,9 @@ import {
   faLinkedin,
   faMedium,
 } from '@fortawesome/fontawesome-free-brands';
-import Image from 'next/image';
-import { IntroCopy, WorkCopy, AboutCopy } from './copy';
+import About from './articles/About';
+import Intro from './articles/Intro';
+import Work from './articles/Work';
 
 interface MainProps {
   article?: string;
@@ -30,7 +31,7 @@ const Main: React.FC<MainProps> = ({
 
   const close = (
     <div
-      className="close"
+      className='close'
       onClick={() => {
         onCloseArticle && onCloseArticle();
       }}
@@ -78,118 +79,52 @@ const Main: React.FC<MainProps> = ({
   };
 
   return (
-    <div id="main" style={timeout ? { display: 'flex' } : { display: 'none' }}>
-      {/* Intro Article */}
-      <article
-        id="intro"
-        className={`${article === 'intro' ? 'active' : ''} ${
-          articleTimeout ? 'timeout' : ''
-        }`}
-        style={{ display: 'none' }}
-      >
-        <h2 className="major">Intro</h2>
-        <p>{IntroCopy.main}</p>
-        <span className="image main image__intro">
-          <Image
-            className="laughing-photo"
-            src="/images/intro-pic.jpg"
-            alt=""
-            height={100}
-            width={200}
-            style={{ height: 'auto' }}
-          />
-        </span>
-        {close}
-      </article>
+    <div id='main' style={timeout ? { display: 'flex' } : { display: 'none' }}>
+      <Intro article={article} articleTimeout={articleTimeout} close={close} />
 
-      {/* Work Article */}
-      <article
-        id="work"
-        className={`${article === 'work' ? 'active' : ''} ${
-          articleTimeout ? 'timeout' : ''
-        }`}
-        style={{ display: 'none' }}
-      >
-        <h2 className="major">Work</h2>
-        {WorkCopy.main.map((text: string, i: number) => (
-          <p key={i}>{text}</p>
-        ))}
-        <h3 className="experience">Experience</h3>
-        {WorkCopy.experience.map((text: any, i: number) => (
-          <div className="experience__chunk" key={i}>
-            <h4 className="experience__what">
-              {text.title} at {text.workplace}
-            </h4>
-            <span className="experience__when">{text.dates}</span>
-            <p className="experience__blurb">{text.blurb}</p>
-          </div>
-        ))}
-        {close}
-      </article>
+      <Work article={article} articleTimeout={articleTimeout} close={close} />
 
-      {/* About Article */}
-      <article
-        id="about"
-        className={`${article === 'about' ? 'active' : ''} ${
-          articleTimeout ? 'timeout' : ''
-        }`}
-        style={{ display: 'none' }}
-      >
-        <h2 className="major">About</h2>
-        <span className="image main image__about">
-          <Image
-            className="curious-george-photo"
-            src="/images/curious-george.png"
-            alt=""
-            width={200}
-            height={113}
-          />
-        </span>
-        {AboutCopy.main.map((text: string, i: number) => (
-          <p key={i}>{text}</p>
-        ))}
-        {close}
-      </article>
+      <About article={article} articleTimeout={articleTimeout} close={close} />
 
       {/* Contact Article */}
       <article
-        id="contact"
+        id='contact'
         className={`${article === 'contact' ? 'active' : ''} ${
           articleTimeout ? 'timeout' : ''
         }`}
         style={{ display: 'none' }}
       >
-        <h2 className="major">Contact</h2>
-        <form method="post">
-          <div className="field half first">
-            <label htmlFor="name">Name</label>
+        <h2 className='major'>Contact</h2>
+        <form method='post'>
+          <div className='field half first'>
+            <label htmlFor='name'>Name</label>
             <input
-              type="text"
-              name="name"
-              id="name"
+              type='text'
+              name='name'
+              id='name'
               value={formData.name}
               onChange={(e) =>
                 setFormData({ ...formData, name: e.target.value })
               }
             />
           </div>
-          <div className="field half">
-            <label htmlFor="email">Email</label>
+          <div className='field half'>
+            <label htmlFor='email'>Email</label>
             <input
-              type="text"
-              name="email"
-              id="email"
+              type='text'
+              name='email'
+              id='email'
               value={formData.email}
               onChange={(e) =>
                 setFormData({ ...formData, email: e.target.value })
               }
             />
           </div>
-          <div className="field">
-            <label htmlFor="message">Message</label>
+          <div className='field'>
+            <label htmlFor='message'>Message</label>
             <textarea
-              name="message"
-              id="message"
+              name='message'
+              id='message'
               rows={4}
               value={formData.message}
               onChange={(e) =>
@@ -197,11 +132,11 @@ const Main: React.FC<MainProps> = ({
               }
             ></textarea>
           </div>
-          <ul className="actions">
-            <li key="contact-action-1">
+          <ul className='actions'>
+            <li key='contact-action-1'>
               <button
-                type="submit"
-                className="special"
+                type='submit'
+                className='special'
                 onClick={(e) => {
                   e.preventDefault();
                   if (!formValidation()) {
@@ -214,10 +149,10 @@ const Main: React.FC<MainProps> = ({
                 Send Message
               </button>
             </li>
-            <li key="contact-action-2">
+            <li key='contact-action-2'>
               <input
-                type="reset"
-                value="Reset"
+                type='reset'
+                value='Reset'
                 onClick={(e) => {
                   e.preventDefault();
                   setFormData({ name: '', email: '', message: '' }); // Reset the form fields
@@ -226,27 +161,27 @@ const Main: React.FC<MainProps> = ({
             </li>
           </ul>
         </form>
-        <ul className="icons">
-          <li key="contact-icon-1">
-            <a href="https://github.com/paolov1928">
+        <ul className='icons'>
+          <li key='contact-icon-1'>
+            <a href='https://github.com/paolov1928'>
               {/* @ts-ignore */}
               <FontAwesomeIcon icon={faGithub} />
             </a>
           </li>
-          <li key="contact-icon-2">
-            <a href="https://www.linkedin.com/in/paolo-ventura/">
+          <li key='contact-icon-2'>
+            <a href='https://www.linkedin.com/in/paolo-ventura/'>
               {/* @ts-ignore */}
               <FontAwesomeIcon icon={faLinkedin} />
             </a>
           </li>
-          <li key="contact-icon-3">
-            <a href="https://medium.com/@ventura.paolo">
+          <li key='contact-icon-3'>
+            <a href='https://medium.com/@ventura.paolo'>
               {/* @ts-ignore */}
               <FontAwesomeIcon icon={faMedium} />
             </a>
           </li>
-          <li key="contact-icon-4">
-            <a href="https://www.instagram.com/paolov1928/">
+          <li key='contact-icon-4'>
+            <a href='https://www.instagram.com/paolov1928/'>
               {/* @ts-ignore */}
               <FontAwesomeIcon icon={faInstagram} />
             </a>
