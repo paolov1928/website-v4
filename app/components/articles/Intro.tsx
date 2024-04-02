@@ -8,7 +8,7 @@ export default function Intro() {
   const id = 'intro';
   return (
     <Article id={id} article={article} articleTimeout={articleTimeout}>
-      <Article.Title id={id} />
+      <Article.Title />
       <p>{IntroCopy.main}</p>
       <span className='image main image__intro'>
         <Image

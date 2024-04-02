@@ -7,7 +7,7 @@ export default function Work() {
   const id = 'work';
   return (
     <Article id={id} article={article} articleTimeout={articleTimeout}>
-      <Article.Title id={id} />
+      <Article.Title />
       {WorkCopy.main.map((text: string, i: number) => (
         <p key={i}>{text}</p>
       ))}

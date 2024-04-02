@@ -34,8 +34,9 @@ const Close = () => {
   );
 };
 
-const Title = ({ id }: { id: string }) => {
-  return <h2 className='major'>{id}</h2>;
+const Title = () => {
+  const { article } = useArticleContext();
+  return <h2 className='major'>{article}</h2>;
 };
 
 Article.Title = Title;

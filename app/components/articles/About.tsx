@@ -8,7 +8,7 @@ export default function About() {
   const id = 'about';
   return (
     <Article id={id} article={article} articleTimeout={articleTimeout}>
-      <Article.Title id={id} />
+      <Article.Title />
       <span className='image main image__about'>
         <Image
           className='curious-george-photo'
