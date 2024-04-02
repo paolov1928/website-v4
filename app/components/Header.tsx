@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLemon } from '@fortawesome/fontawesome-free-regular';
+import { faSnowflake } from '@fortawesome/fontawesome-free-regular';
 import { HeaderCopy, PageTitles } from './copy';
 import { useArticleContext } from '../context/ArticleContext';
 
@@ -9,7 +9,7 @@ const Header: React.FC = () => {
     <header id='header' style={hasTimedOut ? { display: 'none' } : {}}>
       <div className='logo'>
         {/* @ts-ignore */}
-        <FontAwesomeIcon icon={faLemon} transform='grow-18' />
+        <FontAwesomeIcon icon={faSnowflake} transform='grow-18' />
       </div>
       <div className='content'>
         <div className='inner'>
