@@ -1,14 +1,14 @@
 import Image from 'next/image';
 import { IntroCopy } from '../copy';
 import Article from './Article';
+import { useArticleContext } from './ArticleContext';
 
 interface IntroProps {
-  article?: string;
-  articleTimeout?: boolean;
   close: React.JSX.Element;
 }
 
-export default function Intro({ close, article, articleTimeout }: IntroProps) {
+export default function Intro({ close }: IntroProps) {
+  const { articleTimeout, article } = useArticleContext();
   const id = 'intro';
   return (
     <Article id={id} article={article} articleTimeout={articleTimeout}>

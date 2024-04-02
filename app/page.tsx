@@ -2,16 +2,11 @@
 
 import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
-
-import Footer from './components/Footer';
-import Header from './components/Header';
-import Main from './components/Main';
+import Index from './components/Index';
+import { ArticleContextProvider } from './components/articles/ArticleContext';
 
 const IndexPage = () => {
   const [isArticleVisible, setIsArticleVisible] = useState(false);
-  const [timeoutState, setTimeoutState] = useState(false);
-  const [articleTimeout, setArticleTimeout] = useState(false);
-  const [article, setArticle] = useState('');
   const [loading, setLoading] = useState('is-loading');
 
   useEffect(() => {
@@ -21,32 +16,6 @@ const IndexPage = () => {
 
     return () => clearTimeout(timeoutId);
   }, []);
-
-  const handleOpenArticle = (article: any) => {
-    setIsArticleVisible(!isArticleVisible);
-    setArticle(article);
-
-    setTimeout(() => {
-      setTimeoutState(!timeoutState);
-    }, 325);
-
-    setTimeout(() => {
-      setArticleTimeout(!articleTimeout);
-    }, 350);
-  };
-
-  const handleCloseArticle = () => {
-    setArticleTimeout(!articleTimeout);
-
-    setTimeout(() => {
-      setTimeoutState(!timeoutState);
-    }, 325);
-
-    setTimeout(() => {
-      setIsArticleVisible(!isArticleVisible);
-      setArticle('');
-    }, 350);
-  };
 
   return (
     <div
@@ -58,21 +27,19 @@ const IndexPage = () => {
         <Head>
           <title>Paolo&apos;s Website</title>
 
-          <meta name="viewport" content="width=device-width, initial-scale=1" />
+          <meta name='viewport' content='width=device-width, initial-scale=1' />
         </Head>
 
-        <div id="wrapper">
-          <Header onOpenArticle={handleOpenArticle} timeout={timeoutState} />
-          <Main
-            timeout={timeoutState}
-            articleTimeout={articleTimeout}
-            article={article}
-            onCloseArticle={handleCloseArticle}
-          />
-          <Footer timeout={timeoutState} />
+        <div id='wrapper'>
+          <ArticleContextProvider>
+            <Index
+              isArticleVisible={isArticleVisible}
+              setIsArticleVisible={setIsArticleVisible}
+            />
+          </ArticleContextProvider>
         </div>
 
-        <div id="bg" />
+        <div id='bg' />
       </div>
     </div>
   );

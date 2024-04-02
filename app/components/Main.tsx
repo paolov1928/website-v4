@@ -9,25 +9,21 @@ import {
 import About from './articles/About';
 import Intro from './articles/Intro';
 import Work from './articles/Work';
+import { useArticleContext } from './articles/ArticleContext';
 
 interface MainProps {
-  article?: string;
-  articleTimeout?: boolean;
   onCloseArticle?: () => void;
   timeout?: boolean;
 }
 
-const Main: React.FC<MainProps> = ({
-  article,
-  articleTimeout,
-  onCloseArticle,
-  timeout,
-}) => {
+const Main: React.FC<MainProps> = ({ onCloseArticle, timeout }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     message: '',
   });
+
+  const { articleTimeout, article } = useArticleContext();
 
   const close = (
     <div
@@ -80,11 +76,11 @@ const Main: React.FC<MainProps> = ({
 
   return (
     <div id='main' style={timeout ? { display: 'flex' } : { display: 'none' }}>
-      <Intro article={article} articleTimeout={articleTimeout} close={close} />
+      <Intro close={close} />
 
-      <Work article={article} articleTimeout={articleTimeout} close={close} />
+      <Work close={close} />
 
-      <About article={article} articleTimeout={articleTimeout} close={close} />
+      <About close={close} />
 
       {/* Contact Article */}
       <article

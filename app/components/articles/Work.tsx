@@ -1,13 +1,13 @@
 import { WorkCopy } from '../copy';
 import Article from './Article';
+import { useArticleContext } from './ArticleContext';
 
 interface WorkProps {
-  article?: string;
-  articleTimeout?: boolean;
   close: React.JSX.Element;
 }
 
-export default function Work({ close, article, articleTimeout }: WorkProps) {
+export default function Work({ close }: WorkProps) {
+  const { articleTimeout, article } = useArticleContext();
   const id = 'work';
   return (
     <Article id={id} article={article} articleTimeout={articleTimeout}>
