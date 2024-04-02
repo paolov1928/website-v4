@@ -32,6 +32,21 @@ export const ArticleContextProvider = ({
 }: ArticleContextProviderProps) => {
   const [articleTimeout, setArticleTimeout] = useState(false);
   const [article, setArticle] = useState('');
+  const handleCloseArticle = () => {
+    if (!setArticle || !setArticleTimeout) {
+      return;
+    }
+    setArticleTimeout(!articleTimeout);
+
+    setTimeout(() => {
+      setTimeoutState(!timeoutState);
+    }, 325);
+
+    setTimeout(() => {
+      setIsArticleVisible(!isArticleVisible);
+      setArticle('');
+    }, 350);
+  };
 
   return (
     <ArticleContext.Provider

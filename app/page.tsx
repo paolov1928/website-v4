@@ -1,21 +1,14 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Head from 'next/head';
 import Content from './components/Content';
 import { ArticleContextProvider } from './components/articles/ArticleContext';
+import { useLoading } from './hooks/useLoading';
 
 const IndexPage = () => {
   const [isArticleVisible, setIsArticleVisible] = useState(false);
-  const [loading, setLoading] = useState('is-loading');
-
-  useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      setLoading('');
-    }, 100);
-
-    return () => clearTimeout(timeoutId);
-  }, []);
+  const { loading } = useLoading();
 
   return (
     <div
