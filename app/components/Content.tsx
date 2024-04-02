@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Footer from './Footer';
 import Header from './Header';
 import ArticleContainer from './ArticleContainer';
-import { useArticleContext } from './articles/ArticleContext';
+import { useArticleContext } from '../context/ArticleContext';
 
 export default function ContentProps() {
   const [timeoutState, setTimeoutState] = useState(false);

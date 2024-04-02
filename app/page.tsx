@@ -5,7 +5,7 @@ import Content from './components/Content';
 import {
   ArticleContextProvider,
   useArticleContext,
-} from './components/articles/ArticleContext';
+} from './context/ArticleContext';
 
 const IndexPageWrapper = () => {
   return (

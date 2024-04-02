@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { AboutCopy } from '../copy';
 import Article from './Article';
-import { useArticleContext } from './ArticleContext';
+import { useArticleContext } from '../../context/ArticleContext';
 
 interface AboutProps {
   close: React.JSX.Element;

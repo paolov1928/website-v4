@@ -9,7 +9,7 @@ import {
 import About from './articles/About';
 import Intro from './articles/Intro';
 import Work from './articles/Work';
-import { useArticleContext } from './articles/ArticleContext';
+import { useArticleContext } from '../context/ArticleContext';
 
 interface ArticleContainerProps {
   onCloseArticle?: () => void;
