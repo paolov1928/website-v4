@@ -23,7 +23,7 @@ const Header: React.FC = () => {
       </div>
       <nav>
         <ul>
-          {PageTitles.map((pt) => {
+          {PageTitles.filter((pt) => !!pt).map((pt) => {
             return (
               <li key={`page-title-${pt}`}>
                 <button
