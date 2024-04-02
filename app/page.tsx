@@ -1,11 +1,13 @@
 'use client';
 
 import Head from 'next/head';
-import Content from './components/Content';
 import {
   ArticleContextProvider,
   useArticleContext,
 } from './context/ArticleContext';
+import Header from './components/Header';
+import ArticleContainer from './components/ArticleContainer';
+import Footer from './components/Footer';
 
 const IndexPageWrapper = () => {
   return (
@@ -16,8 +18,8 @@ const IndexPageWrapper = () => {
 };
 
 const IndexPage = () => {
-  const { loading, isArticleVisible } =
-    useArticleContext();
+  const { loading, isArticleVisible } = useArticleContext();
+
   return (
     <div
       className={`body ${loading} ${
@@ -32,7 +34,9 @@ const IndexPage = () => {
         </Head>
 
         <div id='wrapper'>
-          <Content />
+          <Header />
+          <ArticleContainer />
+          <Footer />
         </div>
 
         <div id='bg' />

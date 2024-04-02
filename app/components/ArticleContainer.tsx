@@ -11,25 +11,22 @@ import Intro from './articles/Intro';
 import Work from './articles/Work';
 import { useArticleContext } from '../context/ArticleContext';
 
-interface ArticleContainerProps {
-  onCloseArticle?: () => void;
-  timeout?: boolean;
-}
 
-const ArticleContainer: React.FC<ArticleContainerProps> = ({ onCloseArticle, timeout }) => {
+
+const ArticleContainer: React.FC = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     message: '',
   });
 
-  const { articleTimeout, article } = useArticleContext();
+  const { articleTimeout, article, handleCloseArticle, timeoutState } = useArticleContext();
 
   const close = (
     <div
       className='close'
       onClick={() => {
-        onCloseArticle && onCloseArticle();
+        handleCloseArticle && handleCloseArticle();
       }}
     ></div>
   );
@@ -75,7 +72,10 @@ const ArticleContainer: React.FC<ArticleContainerProps> = ({ onCloseArticle, tim
   };
 
   return (
-    <div id='main' style={timeout ? { display: 'flex' } : { display: 'none' }}>
+    <div
+      id='main'
+      style={timeoutState ? { display: 'flex' } : { display: 'none' }}
+    >
       <Intro close={close} />
 
       <Work close={close} />
