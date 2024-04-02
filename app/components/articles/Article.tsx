@@ -1,7 +1,8 @@
 import { useArticleContext } from '@/app/context/ArticleContext';
+import { PageTitle } from '../copy';
 
 interface ArticleProps {
-  article?: string;
+  article?: PageTitle;
   articleTimeout?: boolean;
   id: string;
   children: React.ReactNode;

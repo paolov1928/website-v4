@@ -1,4 +1,12 @@
-export const PageTitles = ['intro', 'work', 'about', 'contact'];
+export enum PageTitle {
+  Intro = 'intro',
+  Work = 'work',
+  About = 'about',
+  Contact = 'contact',
+  Home = '',
+}
+
+export const PageTitles = Object.values(PageTitle);
 
 export const HeaderCopy = {
   name: 'Paolo Ventura',

@@ -1,11 +1,12 @@
 import { createContext, useContext, useState } from 'react';
+import { PageTitle } from '../components/copy';
 
 interface ArticleContextProps {
-  article?: string;
+  article?: PageTitle;
   articleTimeout?: boolean;
   isArticleVisible: boolean;
   timeoutState: boolean;
-  handleOpenArticle: (article: any) => void;
+  handleOpenArticle: (article: PageTitle) => void;
   handleCloseArticle: () => void;
 }
 
@@ -27,16 +28,11 @@ export const ArticleContextProvider = ({
   children,
 }: ArticleContextProviderProps) => {
   const [articleTimeout, setArticleTimeout] = useState(false);
-  const [article, setArticle] = useState('');
+  const [article, setArticle] = useState(PageTitle.Home);
   const [isArticleVisible, setIsArticleVisible] = useState(false);
-
   const [timeoutState, setTimeoutState] = useState(false);
 
-  const handleOpenArticle = (article: any) => {
-    if (!setArticle || !setArticleTimeout) {
-      return;
-    }
-
+  const handleOpenArticle = (article: PageTitle) => {
     setIsArticleVisible(!isArticleVisible);
     setArticle(article);
 
@@ -50,9 +46,6 @@ export const ArticleContextProvider = ({
   };
 
   const handleCloseArticle = () => {
-    if (!setArticle || !setArticleTimeout) {
-      return;
-    }
     setArticleTimeout(!articleTimeout);
 
     setTimeout(() => {
@@ -61,7 +54,7 @@ export const ArticleContextProvider = ({
 
     setTimeout(() => {
       setIsArticleVisible(!isArticleVisible);
-      setArticle('');
+      setArticle(PageTitle.Home);
     }, 350);
   };
 
