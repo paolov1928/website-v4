@@ -6,20 +6,19 @@ import Header from './Header';
 import ArticleContainer from './ArticleContainer';
 import { useArticleContext } from './articles/ArticleContext';
 
-type IndexProps = {
+type ContentProps = {
   isArticleVisible: boolean;
   setIsArticleVisible: Dispatch<SetStateAction<boolean>>;
 };
 
-export default function Index({
+export default function ContentProps({
   setIsArticleVisible,
   isArticleVisible,
-}: IndexProps) {
+}: ContentProps) {
   const [timeoutState, setTimeoutState] = useState(false);
 
   // REFACTOR THESE INTO A PROVIDER SO articles can get it
-  const { articleTimeout, setArticleTimeout, article, setArticle } =
-    useArticleContext();
+  const { articleTimeout, setArticleTimeout, setArticle } = useArticleContext();
 
   const handleOpenArticle = (article: any) => {
     if (!setArticle || !setArticleTimeout) {

@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
-import Index from './components/Index';
+import Content from './components/Content';
 import { ArticleContextProvider } from './components/articles/ArticleContext';
 
 const IndexPage = () => {
@@ -32,7 +32,7 @@ const IndexPage = () => {
 
         <div id='wrapper'>
           <ArticleContextProvider>
-            <Index
+            <Content
               isArticleVisible={isArticleVisible}
               setIsArticleVisible={setIsArticleVisible}
             />
