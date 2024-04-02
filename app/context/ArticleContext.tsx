@@ -5,7 +5,7 @@ interface ArticleContextProps {
   article?: PageTitle;
   articleTimeout?: boolean;
   isArticleVisible: boolean;
-  timeoutState: boolean;
+  hasTimedOut: boolean;
   handleOpenArticle: (article: PageTitle) => void;
   handleCloseArticle: () => void;
 }
@@ -30,14 +30,14 @@ export const ArticleContextProvider = ({
   const [articleTimeout, setArticleTimeout] = useState(false);
   const [article, setArticle] = useState(PageTitle.Home);
   const [isArticleVisible, setIsArticleVisible] = useState(false);
-  const [timeoutState, setTimeoutState] = useState(false);
+  const [hasTimedOut, setHasTimedOut] = useState(false);
 
   const handleOpenArticle = (article: PageTitle) => {
     setIsArticleVisible(!isArticleVisible);
     setArticle(article);
 
     setTimeout(() => {
-      setTimeoutState(!timeoutState);
+      setHasTimedOut(previousState => !previousState);
     }, 325);
 
     setTimeout(() => {
@@ -49,7 +49,7 @@ export const ArticleContextProvider = ({
     setArticleTimeout(!articleTimeout);
 
     setTimeout(() => {
-      setTimeoutState(!timeoutState);
+      setHasTimedOut(previousState => !previousState);
     }, 325);
 
     setTimeout(() => {
@@ -66,7 +66,7 @@ export const ArticleContextProvider = ({
         isArticleVisible,
         handleOpenArticle,
         handleCloseArticle,
-        timeoutState,
+        hasTimedOut,
       }}
     >
       {children}

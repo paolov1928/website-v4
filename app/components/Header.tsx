@@ -4,9 +4,9 @@ import { HeaderCopy, PageTitles } from './copy';
 import { useArticleContext } from '../context/ArticleContext';
 
 const Header: React.FC = () => {
-  const { handleOpenArticle, timeoutState } = useArticleContext();
+  const { handleOpenArticle, hasTimedOut } = useArticleContext();
   return (
-    <header id='header' style={timeoutState ? { display: 'none' } : {}}>
+    <header id='header' style={hasTimedOut ? { display: 'none' } : {}}>
       <div className='logo'>
         {/* @ts-ignore */}
         <FontAwesomeIcon icon={faLemon} transform='grow-18' />

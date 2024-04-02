@@ -2,9 +2,9 @@ import React from 'react';
 import { useArticleContext } from '../context/ArticleContext';
 
 const Footer: React.FC = () => {
-  const { timeoutState } = useArticleContext();
+  const { hasTimedOut } = useArticleContext();
   return (
-    <footer id='footer' style={timeoutState ? { display: 'none' } : {}}>
+    <footer id='footer' style={hasTimedOut ? { display: 'none' } : {}}>
       <p className='copyright'>Thanks for visiting!</p>
     </footer>
   );

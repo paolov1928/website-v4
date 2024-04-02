@@ -6,11 +6,11 @@ import { useArticleContext } from '../context/ArticleContext';
 import Contact from './articles/Contact';
 
 const ArticleContainer: React.FC = () => {
-  const { timeoutState } = useArticleContext();
+  const { hasTimedOut } = useArticleContext();
   return (
     <div
       id='main'
-      style={timeoutState ? { display: 'flex' } : { display: 'none' }}
+      style={hasTimedOut ? { display: 'flex' } : { display: 'none' }}
     >
       <Intro />
 
