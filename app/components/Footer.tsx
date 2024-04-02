@@ -1,13 +1,13 @@
 import React from 'react';
+import { useArticleContext } from '../context/ArticleContext';
 
-interface FooterProps {
-  timeout?: boolean;
-}
-
-const Footer: React.FC<FooterProps> = ({ timeout }) => (
-  <footer id="footer" style={timeout ? { display: 'none' } : {}}>
-    <p className="copyright">Thanks for visiting!</p>
-  </footer>
-);
+const Footer: React.FC = () => {
+  const { hasTimedOut } = useArticleContext();
+  return (
+    <footer id='footer' style={hasTimedOut ? { display: 'none' } : {}}>
+      <p className='copyright'>Thanks for visiting!</p>
+    </footer>
+  );
+};
 
 export default Footer;
