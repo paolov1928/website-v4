@@ -1,18 +1,9 @@
-import {
-  Dispatch,
-  SetStateAction,
-  createContext,
-  useContext,
-  useState,
-} from 'react';
+import { createContext, useContext, useState } from 'react';
 
 interface ArticleContextProps {
   article?: string;
   articleTimeout?: boolean;
-  setArticleTimeout?: Dispatch<SetStateAction<boolean>>;
-  setArticle?: Dispatch<SetStateAction<string>>;
   isArticleVisible: boolean;
-  setIsArticleVisible: Dispatch<SetStateAction<boolean>>;
   timeoutState: boolean;
   handleOpenArticle: (article: any) => void;
   handleCloseArticle: () => void;
@@ -78,11 +69,8 @@ export const ArticleContextProvider = ({
     <ArticleContext.Provider
       value={{
         articleTimeout,
-        setArticleTimeout,
         article,
-        setArticle,
         isArticleVisible,
-        setIsArticleVisible,
         handleOpenArticle,
         handleCloseArticle,
         timeoutState,
