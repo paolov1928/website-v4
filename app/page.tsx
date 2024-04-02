@@ -1,15 +1,23 @@
 'use client';
 
-import { useState } from 'react';
 import Head from 'next/head';
 import Content from './components/Content';
-import { ArticleContextProvider } from './components/articles/ArticleContext';
-import { useLoading } from './hooks/useLoading';
+import {
+  ArticleContextProvider,
+  useArticleContext,
+} from './components/articles/ArticleContext';
+
+const IndexPageWrapper = () => {
+  return (
+    <ArticleContextProvider>
+      <IndexPage />
+    </ArticleContextProvider>
+  );
+};
 
 const IndexPage = () => {
-  const [isArticleVisible, setIsArticleVisible] = useState(false);
-  const { loading } = useLoading();
-
+  const { loading, isArticleVisible } =
+    useArticleContext();
   return (
     <div
       className={`body ${loading} ${
@@ -24,12 +32,7 @@ const IndexPage = () => {
         </Head>
 
         <div id='wrapper'>
-          <ArticleContextProvider>
-            <Content
-              isArticleVisible={isArticleVisible}
-              setIsArticleVisible={setIsArticleVisible}
-            />
-          </ArticleContextProvider>
+          <Content />
         </div>
 
         <div id='bg' />
@@ -38,4 +41,4 @@ const IndexPage = () => {
   );
 };
 
-export default IndexPage;
+export default IndexPageWrapper;

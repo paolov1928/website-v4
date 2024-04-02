@@ -1,24 +1,22 @@
 'use client';
 
-import { Dispatch, SetStateAction, useState } from 'react';
+import { useState } from 'react';
 import Footer from './Footer';
 import Header from './Header';
 import ArticleContainer from './ArticleContainer';
 import { useArticleContext } from './articles/ArticleContext';
 
-type ContentProps = {
-  isArticleVisible: boolean;
-  setIsArticleVisible: Dispatch<SetStateAction<boolean>>;
-};
-
-export default function ContentProps({
-  setIsArticleVisible,
-  isArticleVisible,
-}: ContentProps) {
+export default function ContentProps() {
   const [timeoutState, setTimeoutState] = useState(false);
 
   // REFACTOR THESE INTO A PROVIDER SO articles can get it
-  const { articleTimeout, setArticleTimeout, setArticle } = useArticleContext();
+  const {
+    articleTimeout,
+    setArticleTimeout,
+    setArticle,
+    setIsArticleVisible,
+    isArticleVisible,
+  } = useArticleContext();
 
   const handleOpenArticle = (article: any) => {
     if (!setArticle || !setArticleTimeout) {
