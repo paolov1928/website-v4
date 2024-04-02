@@ -8,6 +8,7 @@ import {
 import Header from './components/Header';
 import ArticleContainer from './components/ArticleContainer';
 import Footer from './components/Footer';
+import { useLoading } from './hooks/useLoading';
 
 const IndexPageWrapper = () => {
   return (
@@ -18,7 +19,8 @@ const IndexPageWrapper = () => {
 };
 
 const IndexPage = () => {
-  const { loading, isArticleVisible } = useArticleContext();
+  const { loading } = useLoading();
+  const { isArticleVisible } = useArticleContext();
 
   return (
     <div

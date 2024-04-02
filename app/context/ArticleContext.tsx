@@ -1,4 +1,3 @@
-import { useLoading } from '@/app/hooks/useLoading';
 import {
   Dispatch,
   SetStateAction,
@@ -12,7 +11,6 @@ interface ArticleContextProps {
   articleTimeout?: boolean;
   setArticleTimeout?: Dispatch<SetStateAction<boolean>>;
   setArticle?: Dispatch<SetStateAction<string>>;
-  loading: string;
   isArticleVisible: boolean;
   setIsArticleVisible: Dispatch<SetStateAction<boolean>>;
   timeoutState: boolean;
@@ -40,7 +38,6 @@ export const ArticleContextProvider = ({
   const [articleTimeout, setArticleTimeout] = useState(false);
   const [article, setArticle] = useState('');
   const [isArticleVisible, setIsArticleVisible] = useState(false);
-  const { loading } = useLoading();
 
   const [timeoutState, setTimeoutState] = useState(false);
 
@@ -84,7 +81,6 @@ export const ArticleContextProvider = ({
         setArticleTimeout,
         article,
         setArticle,
-        loading,
         isArticleVisible,
         setIsArticleVisible,
         handleOpenArticle,
