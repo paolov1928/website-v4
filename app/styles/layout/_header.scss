@@ -47,7 +47,7 @@
       display: block;
       position: absolute;
       top: calc(-3.5rem - 1px);
-      left: calc(50% - #{_size(border-width) * 1});
+      left: calc(50% - 4.5px);
       width: _size(border-width);
       height: calc(3.5rem + 1px);
       background: _palette(border);
