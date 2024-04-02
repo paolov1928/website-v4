@@ -3,10 +3,8 @@
 import { Dispatch, SetStateAction, useState } from 'react';
 import Footer from './Footer';
 import Header from './Header';
-import Main from './Main';
+import ArticleContainer from './ArticleContainer';
 import { useArticleContext } from './articles/ArticleContext';
-
-// import { useArticleContext } from './components/articles/ArticleContext';
 
 type IndexProps = {
   isArticleVisible: boolean;
@@ -58,7 +56,7 @@ export default function Index({
   return (
     <>
       <Header onOpenArticle={handleOpenArticle} timeout={timeoutState} />
-      <Main
+      <ArticleContainer
         timeout={timeoutState}
         onCloseArticle={handleCloseArticle}
       />

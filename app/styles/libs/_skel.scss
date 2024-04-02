@@ -226,7 +226,7 @@
 			.container.\35 0\25			{ width: $width * 0.5; }
 			.container.\32 5\25			{ width: $width * 0.25; }
 
-		// Main class.
+		// ArticleContainer class.
 			.container {
 				@if $lock {
 					width: $width !important;

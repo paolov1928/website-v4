@@ -11,12 +11,12 @@ import Intro from './articles/Intro';
 import Work from './articles/Work';
 import { useArticleContext } from './articles/ArticleContext';
 
-interface MainProps {
+interface ArticleContainerProps {
   onCloseArticle?: () => void;
   timeout?: boolean;
 }
 
-const Main: React.FC<MainProps> = ({ onCloseArticle, timeout }) => {
+const ArticleContainer: React.FC<ArticleContainerProps> = ({ onCloseArticle, timeout }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -189,4 +189,4 @@ const Main: React.FC<MainProps> = ({ onCloseArticle, timeout }) => {
   );
 };
 
-export default Main;
+export default ArticleContainer;
