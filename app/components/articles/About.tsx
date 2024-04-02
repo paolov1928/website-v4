@@ -3,11 +3,7 @@ import { AboutCopy } from '../copy';
 import Article from './Article';
 import { useArticleContext } from '../../context/ArticleContext';
 
-interface AboutProps {
-  close: React.JSX.Element;
-}
-
-export default function About({ close }: AboutProps) {
+export default function About() {
   const { articleTimeout, article } = useArticleContext();
   const id = 'about';
   return (
@@ -25,7 +21,7 @@ export default function About({ close }: AboutProps) {
       {AboutCopy.main.map((text: string, i: number) => (
         <p key={i}>{text}</p>
       ))}
-      {close}
+      <Article.Close />
     </Article>
   );
 }

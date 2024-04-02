@@ -3,11 +3,7 @@ import { IntroCopy } from '../copy';
 import Article from './Article';
 import { useArticleContext } from '../../context/ArticleContext';
 
-interface IntroProps {
-  close: React.JSX.Element;
-}
-
-export default function Intro({ close }: IntroProps) {
+export default function Intro() {
   const { articleTimeout, article } = useArticleContext();
   const id = 'intro';
   return (
@@ -24,7 +20,7 @@ export default function Intro({ close }: IntroProps) {
           style={{ height: 'auto' }}
         />
       </span>
-      {close}
+      <Article.Close />
     </Article>
   );
 }

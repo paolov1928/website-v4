@@ -10,8 +10,7 @@ import About from './articles/About';
 import Intro from './articles/Intro';
 import Work from './articles/Work';
 import { useArticleContext } from '../context/ArticleContext';
-
-
+import Article from './articles/Article';
 
 const ArticleContainer: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -20,16 +19,7 @@ const ArticleContainer: React.FC = () => {
     message: '',
   });
 
-  const { articleTimeout, article, handleCloseArticle, timeoutState } = useArticleContext();
-
-  const close = (
-    <div
-      className='close'
-      onClick={() => {
-        handleCloseArticle && handleCloseArticle();
-      }}
-    ></div>
-  );
+  const { articleTimeout, article, timeoutState } = useArticleContext();
 
   const getContactFormElements = () => {
     return {
@@ -76,11 +66,11 @@ const ArticleContainer: React.FC = () => {
       id='main'
       style={timeoutState ? { display: 'flex' } : { display: 'none' }}
     >
-      <Intro close={close} />
+      <Intro />
 
-      <Work close={close} />
+      <Work />
 
-      <About close={close} />
+      <About />
 
       {/* Contact Article */}
       <article
@@ -183,7 +173,7 @@ const ArticleContainer: React.FC = () => {
             </a>
           </li>
         </ul>
-        {close}
+        <Article.Close />
       </article>
     </div>
   );

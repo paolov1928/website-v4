@@ -2,11 +2,7 @@ import { WorkCopy } from '../copy';
 import Article from './Article';
 import { useArticleContext } from '../../context/ArticleContext';
 
-interface WorkProps {
-  close: React.JSX.Element;
-}
-
-export default function Work({ close }: WorkProps) {
+export default function Work() {
   const { articleTimeout, article } = useArticleContext();
   const id = 'work';
   return (
@@ -25,7 +21,7 @@ export default function Work({ close }: WorkProps) {
           <p className='experience__blurb'>{text.blurb}</p>
         </div>
       ))}
-      {close}
+      <Article.Close />
     </Article>
   );
 }
