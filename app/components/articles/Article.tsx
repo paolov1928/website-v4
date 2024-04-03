@@ -22,13 +22,18 @@ const Article = ({ id, article, articleTimeout, children }: ArticleProps) => {
   );
 };
 
-const Close = () => {
+const Close = ({
+  onClick,
+}: {
+  onClick?: () => void;
+}) => {
   const { handleCloseArticle } = useArticleContext();
   return (
     <div
       className='close'
       onClick={() => {
         handleCloseArticle && handleCloseArticle();
+        onClick && onClick();
       }}
     />
   );

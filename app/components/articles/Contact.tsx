@@ -8,53 +8,79 @@ import {
 } from '@fortawesome/fontawesome-free-brands';
 import { useArticleContext } from '../../context/ArticleContext';
 import Article from './Article';
+import { sendToEmailService } from '@/app/actions/contact';
+import { z, ZodError } from 'zod';
+
+const ContactSchema = z.object({
+  name: z.string().min(2),
+  email: z.string().email(),
+  message: z.string().min(10),
+});
+
+export type FormData = z.infer<typeof ContactSchema>;
+
+const initialFormData: FormData = {
+  name: '',
+  email: '',
+  message: '',
+};
 
 export default function Contact() {
   const { articleTimeout, article } = useArticleContext();
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: '',
-  });
-
-  const getContactFormElements = () => {
-    return {
-      name: formData.name,
-      email: formData.email,
-      message: formData.message,
-    };
-  };
+  const [formData, setFormData] = useState<FormData>(initialFormData);
+  const [formErrors, setFormErrors] = useState<
+    Partial<Record<keyof FormData, string>>
+  >({}); // Store error messages
+  const [showSuccess, setShowSuccess] = useState(false);
+  const [showSendingError, setShowSendingError] = useState(false);
 
   const formValidation = () => {
-    const inputs = getContactFormElements();
-    const inputValues = Object.values(inputs);
-    // Check if none are empty
-    return inputValues.every(Boolean);
+    try {
+      ContactSchema.parse(formData);
+      setFormErrors({});
+      return true;
+    } catch (error) {
+      if (error instanceof ZodError) {
+        const fieldErrors: Partial<Record<keyof FormData, string>> = {};
+        error.errors.forEach((err) => {
+          const fieldName = err.path[0] as keyof FormData;
+          fieldErrors[fieldName] = err.message;
+        });
+        setFormErrors(fieldErrors);
+      }
+      return false;
+    }
   };
 
   const handleSubmit = () => {
-    const data = getContactFormElements();
-    onSubmit(data);
-    window.alert('Thank you for the message!');
+    if (formValidation()) {
+      const data = formData;
+      onSubmit(data);
+    }
   };
 
-  const URL = 'fdsfdsf';
-
-  const onSubmit = async (data: any) => {
-    try {
-      await fetch(URL, {
-        method: 'POST',
-        mode: 'cors',
-        cache: 'no-cache',
-        body: JSON.stringify(data),
-        headers: {
-          'Content-type': 'application/json; charset=UTF-8',
-        },
-      });
-    } catch (error) {
-      console.log(error);
+  const onSubmit = async (data: FormData) => {
+    const submitResponse = await sendToEmailService(data);
+    if (submitResponse) {
+      setShowSuccess(true);
+    } else {
+      setShowSendingError(true);
     }
-    console.log('submit successful');
+  };
+
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
+    // Clear error message when user starts typing
+    setFormErrors((prevErrors) => ({
+      ...prevErrors,
+      [name]: '',
+    }));
   };
 
   return (
@@ -66,97 +92,112 @@ export default function Contact() {
       style={{ display: 'none' }}
     >
       <h2 className='major'>Contact</h2>
-      <form method='post'>
-        <div className='field half first'>
-          <label htmlFor='name'>Name</label>
-          <input
-            type='text'
-            name='name'
-            id='name'
-            value={formData.name}
-            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-          />
-        </div>
-        <div className='field half'>
-          <label htmlFor='email'>Email</label>
-          <input
-            type='text'
-            name='email'
-            id='email'
-            value={formData.email}
-            onChange={(e) =>
-              setFormData({ ...formData, email: e.target.value })
-            }
-          />
-        </div>
-        <div className='field'>
-          <label htmlFor='message'>Message</label>
-          <textarea
-            name='message'
-            id='message'
-            rows={4}
-            value={formData.message}
-            onChange={(e) =>
-              setFormData({ ...formData, message: e.target.value })
-            }
-          ></textarea>
-        </div>
-        <ul className='actions'>
-          <li key='contact-action-1'>
-            <button
-              type='submit'
-              className='special'
-              onClick={(e) => {
-                e.preventDefault();
-                if (!formValidation()) {
-                  window.alert('Please fill in all form fields');
-                  return;
-                }
-                handleSubmit();
-              }}
-            >
-              Send Message
-            </button>
-          </li>
-          <li key='contact-action-2'>
+      {showSuccess ? (
+        <h3 className='major'>Thanks for contacting us</h3>
+      ) : (
+        <form method='post'>
+          <div className='field half first'>
+            <label htmlFor='name'>Name</label>
             <input
-              type='reset'
-              value='Reset'
-              onClick={(e) => {
-                e.preventDefault();
-                setFormData({ name: '', email: '', message: '' }); // Reset the form fields
-              }}
+              type='text'
+              name='name'
+              id='name'
+              value={formData.name}
+              onChange={handleInputChange}
             />
-          </li>
-        </ul>
-      </form>
-      <ul className='icons'>
-        <li key='contact-icon-1'>
-          <a href='https://github.com/paolov1928'>
-            {/* @ts-ignore */}
-            <FontAwesomeIcon icon={faGithub} />
-          </a>
-        </li>
-        <li key='contact-icon-2'>
-          <a href='https://www.linkedin.com/in/paolo-ventura/'>
-            {/* @ts-ignore */}
-            <FontAwesomeIcon icon={faLinkedin} />
-          </a>
-        </li>
-        <li key='contact-icon-3'>
-          <a href='https://medium.com/@ventura.paolo'>
-            {/* @ts-ignore */}
-            <FontAwesomeIcon icon={faMedium} />
-          </a>
-        </li>
-        <li key='contact-icon-4'>
-          <a href='https://www.instagram.com/paolov1928/'>
-            {/* @ts-ignore */}
-            <FontAwesomeIcon icon={faInstagram} />
-          </a>
-        </li>
-      </ul>
-      <Article.Close />
+            {formErrors.name && (
+              <span className='error'>{formErrors.name}</span>
+            )}
+          </div>
+          <div className='field half'>
+            <label htmlFor='email'>Email</label>
+            <input
+              type='text'
+              name='email'
+              id='email'
+              value={formData.email}
+              onChange={handleInputChange}
+            />
+            {formErrors.email && (
+              <span className='error'>{formErrors.email}</span>
+            )}
+          </div>
+          <div className='field'>
+            <label htmlFor='message'>Message</label>
+            <textarea
+              name='message'
+              id='message'
+              rows={4}
+              value={formData.message}
+              onChange={handleInputChange}
+            ></textarea>
+            {formErrors.message && (
+              <span className='error'>{formErrors.message}</span>
+            )}
+          </div>
+          <ul className='actions'>
+            <li key='contact-action-1'>
+              <button
+                type='submit'
+                className='special'
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleSubmit();
+                }}
+              >
+                Send Message
+              </button>
+            </li>
+            <li key='contact-action-2'>
+              <input
+                type='reset'
+                value='Reset'
+                onClick={(e) => {
+                  e.preventDefault();
+                  setFormData(initialFormData);
+                  setFormErrors({});
+                }}
+              />
+            </li>
+            {showSendingError && (
+              <li key='contact-action-3'>
+                <p>Message sending error: Please try again in a few minutes</p>
+              </li>
+            )}
+          </ul>
+        </form>
+      )}
+      <SocialIcons />
+      <Article.Close
+        onClick={() => {
+          setTimeout(() => {
+            setFormData(initialFormData);
+            setFormErrors({});
+            setShowSuccess(false);
+            setShowSendingError(false);
+          }, 500);
+        }}
+      />
     </article>
   );
 }
+
+const socialMediaData = [
+  { icon: faGithub, url: 'https://github.com/paolov1928' },
+  { icon: faLinkedin, url: 'https://www.linkedin.com/in/paolo-ventura/' },
+  { icon: faMedium, url: 'https://medium.com/@ventura.paolo' },
+  { icon: faInstagram, url: 'https://www.instagram.com/paolov1928/' },
+];
+
+const SocialIcons = () => (
+  <ul className='icons'>
+    {socialMediaData.map((social, index) => (
+      <li key={`social-contact-icon-${index}`}>
+        <a href={social.url}>
+          {/* @ts-ignore */}
+          <FontAwesomeIcon icon={social.icon} />
+        </a>
+      </li>
+    ))}
+  </ul>
+);
