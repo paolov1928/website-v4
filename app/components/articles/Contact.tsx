@@ -33,6 +33,7 @@ export default function Contact() {
   >({}); // Store error messages
   const [showSuccess, setShowSuccess] = useState(false);
   const [showSendingError, setShowSendingError] = useState(false);
+  const [showSubmitSpinner, setShowSubmitSpinner] = useState(false);
 
   const formValidation = () => {
     try {
@@ -60,12 +61,14 @@ export default function Contact() {
   };
 
   const onSubmit = async (data: FormData) => {
+    setShowSubmitSpinner(true);
     const submitResponse = await sendToEmailService(data);
     if (submitResponse) {
       setShowSuccess(true);
     } else {
       setShowSendingError(true);
     }
+    setShowSubmitSpinner(false);
   };
 
   const handleInputChange = (
@@ -139,13 +142,13 @@ export default function Contact() {
             <li key='contact-action-1'>
               <button
                 type='submit'
-                className='special'
+                className='special preserve-min-width'
                 onClick={(e) => {
                   e.preventDefault();
                   handleSubmit();
                 }}
               >
-                Send Message
+                {showSubmitSpinner ? '⏳' : 'Send Message'}
               </button>
             </li>
             <li key='contact-action-2'>
