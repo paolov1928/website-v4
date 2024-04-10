@@ -30,6 +30,7 @@ const Header: React.FC = () => {
                   onClick={() => {
                     handleOpenArticle(pt);
                   }}
+                  data-cy={`nav-link-${pt}`}
                 >
                   {pt}
                 </button>
