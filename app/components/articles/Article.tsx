@@ -35,6 +35,7 @@ const Close = ({
         handleCloseArticle && handleCloseArticle();
         onClick && onClick();
       }}
+      data-cy='close-article'
     />
   );
 };

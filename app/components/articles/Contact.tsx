@@ -142,6 +142,7 @@ export default function Contact() {
             <li key='contact-action-1'>
               <button
                 type='submit'
+                data-cy='submit-contact-form'
                 className='special preserve-min-width'
                 onClick={(e) => {
                   e.preventDefault();
